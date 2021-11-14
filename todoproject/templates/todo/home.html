@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <title>Todo App</title>
+    <style>
+        .par{
+            color: white;
+        }
+    </style>
+    
+</head>
+<body style="background-color: #333;">
+
+        <nav class="navbar navbar-inverse ">
+            <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Maktab61</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+            </div>
+        </nav>
+            <section>
+
+                <h1 class="text-center  title par" style="padding-bottom: 100px; padding-top: 50px;"><b>Welcome to this Website</b></h1>
+                <div class="container bg-img ">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2 class="par">Todo List</h2>
+                            <p class="par">A to-do list is nothing but a list of tasks you need to complete in a certain period of time. 
+                                It’s a very simple, efficient and extremely popular productivity tool, the only problem is that 
+                                you can find a lot of conflicting advice online on whether to-do lists work or not, and whether 
+                                you should keep them in your productivity tool belt at all.   </p>
+                            <p><a class="btn btn-primary" href="#" role="button">More Info»</a></p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="par">Django</h2>
+                            <p class="par">Django is a high-level Python web framework that enables rapid development of secure and maintainable
+                                 websites. ... Django helps developers avoid many common security mistakes by providing a 
+                                 framework that has been engineered to "do the right things" to protect the website automatically. </p>
+                            <p><a class="btn btn-success" href="#" role="button">More Info»</a></p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="par">Python</h2>
+                            <p class="par">Python is an interpreted, object-oriented, high-level programming language with dynamic semantics. ... 
+                                Python's simple, easy to learn syntax emphasizes readability and therefore reduces the cost of program 
+                                maintenance. Python supports modules and packages, which encourages program modularity and code reuse.</p>
+                            <p><a class="btn btn-danger" href="#" role="button">More Info»</a></p>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+
+
+            </section>
+            
+            <footer class="container par" style="padding-top: 100px;">
+                <p>© Company 2021-2022</p>
+            </footer>
+
+
+
+            <script>
+                title =  document.querySelector('.title')
+               title.addEventListener('click', function(){
+                    title.style.color="Orange"
+                   
+                })
+            </script>
+       
+</body>
+</html>
