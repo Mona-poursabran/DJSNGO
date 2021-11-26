@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Category task {% endblock title %}
+
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href={% static "todo_s/task.css" %}>
+{% endblock style %}
+
+{% block content %}
+<div class="container mt-4">
+        <a class="btn btn-primary" href="{% url 'cat' %}">Back</a>
+        <br>
+        <br>
+        <br>
+        <div><h1 style="color:rgb(199, 10, 126)">Category: {{category.category_name}}</h1></div>
+        <h5> List of tasks which are in this category :) </h5>
+        <br>
+        <h4> <ul class="list-unstyled components "> 
+        {% for t in task %}
+            {% if t.Category.category_name == category.category_name %}
+                 <li><a href="{% url 'detail' t.pk %}"> {{t}} </a> <li>
+            {% endif %}
+        {% endfor %}
+        </ul></h4>
+</div>
+{% endblock content %}

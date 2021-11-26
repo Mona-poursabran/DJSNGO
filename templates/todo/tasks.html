@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %} Tasks {% endblock title %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href={% static "todo_s/task.css" %}>
+{% endblock style %}
+
+
+{% block content %}
+
+<div class="container mt-5">    
+       <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Num</th>
+                    <th scope="col">Tasks</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Get More Info</th>
+                    <th scope="col">ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <th >{{task.title}}</th>
+                    
+                    <th >{{task.date_added}}</th>
+                    <th>
+                        <a href="{% url 'detail' task.pk %}" class="btn btn-warning">Details</a>
+                    </th>
+                    <th >{{task.id}}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+   {% comment %} <div class="container page-todo bootstrap snippets bootdeys">
+<div class="col-sm-7 tasks">
+	<div class="task-list">       
+		<h1>Tasks</h1>
+		<div class="priority high"><span>high priority</span></div>
+		<div class="task high">
+			<div class="desc">
+				<div class="title">Tasks</div>
+				<div>Here we can see First priority tasks</div>               
+                {% for task in object_list %}
+                    {% if task.priority == 1 %}
+                    <ul> 
+                        <a href="{% url 'detail' task.pk %}" ><h4> {{task.title}}</h4></a>
+                    </ul>                    
+                    {% endif %}
+                {% endfor %}    
+      		</div>
+		</div>
+		
+		<div class="priority medium"><span>medium priority</span></div>
+		<div class="task medium">
+			<div class="desc">
+				<div class="title">Tasks</div>
+				<div>Here we can see medium priority tasks</div>
+                {% for task in object_list %}
+                    {% if task.priority == 2 %}
+                    <ul> 
+                        <a href="{% url 'detail' task.pk %}"><h4> {{task.title}}</h4></a>
+                    </ul>                    
+                    {% endif %}
+                {% endfor %} 
+			</div>			
+		<div class="priority low"><span>low priority</span></div>
+		<div class="task low">
+			<div class="desc">
+				<div class="title">Tasks</div>
+				<div>Here we can see lower priority tasks</div>
+			  {% for task in object_list %}
+                    {% if task.priority == 3%}
+                    <ul> 
+                        <a href="{% url 'detail' task.pk %}" ><h4> {{task.title}}</h4></a>
+                    </ul>
+                    {% endif %}
+                {% endfor %} 
+            </div>			
+		<div class="clearfix"></div>		
+	</div>		
+</div>
+</div> {% endcomment %}
+
+
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %} Home Page{% endblock title %}
+
+
+{% block content %}
+
+    <div class="container contact-form">
+    <h1> TODO Application</h1>
+    <br>
+    <br>
+    <form method="POST" class="task-form">
+            {% csrf_token %}
+                <h3>ADD New Task </h3>
+                <br>
+                <br>
+               <div class="row">
+                    <div class="col-md-6">
+                         {% comment %} <div class="form-group">
+                            <input type="text" name="cat" class="form-control input" placeholder="Category *" value="cat" />
+                        </div>  {% endcomment %}
+                        <div class="inputContainer half last">
+                            <label for="category">Categories: </label>
+                            <select id="category" class="taskCategory" name="cat"  required style="background-color: #fff;
+                                                                        border: 3px solid #819af9;
+                                                                        border-radius: 5px;">
+
+                            <option class="disabled btn-primary" value="">Choose a category</option>
+                            {% for cat in category %}
+                                <option class="" value="{{ cat.category_name }}" name="{{ cat.category_name }}">{{ cat.category_name }}</option>
+                            {% endfor %}
+                            </select>
+                            
+                        </div>
+                        <br>
+                        <br> 
+                        <div class="form-group">
+                            <input type="text" name="title" class="form-control" placeholder="Title *" value=""  required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="priority" class="form-control number" placeholder="priority:1>High, 2>medium, 3>low *" min="1" max="3" value="" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="datetime-local" name="time" class="form-control number" value="2021-11-25T08:30" required />
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" class="form-control" placeholder="Your description: * " style="width: 100%; height: 150px;" required></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="submit" name="Add task" class="btnContact btn-info btn" value="Add New Task" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+    </div>
+  
+{% endblock content %}
