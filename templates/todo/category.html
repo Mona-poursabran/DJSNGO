@@ -1,18 +1,95 @@
 {% extends 'base.html' %}
 {% block title %} Category List{% endblock title %}
+
+
 {% load static %}
 {% block style %}
     <link rel="stylesheet" href={% static "todo_s/task.css" %}>
 {% endblock style %}
 
+
 {% block content %}
+<a href="{% url 'new_cat1' %}" style="text-decoration:none"><h4> ADD a new category </h4></a> 
 {% for c in object_list %}
     <div class="container"> 
     <ul>
-            <li><h3><a href="{% url 'cat_task' c.id %}"> {{c}} </a> </h3></li>
+            <li><h4><a href="{% url 'cat_task' c.id %}"> <b>{{c.category_name}} </b></a> </h4></li>
+            <ol><h5 style="color: rgb(99, 2, 99)"><b style="color:rgb(9, 87, 139)">Description :</b> {{c.descriotion}} </h5></ol>
     </ul>
     </div>
 {% endfor %}
+<br>
+<div class="container ">
 
+    <input type="submit" name="empty" class="btnContact btn-danger btn" id="empty" value="Empty Categories" />
+    <input type="submit" name="popular" class="btnContact btn-success btn" id="popular" value="Popular Categories" />
+    
+    <div class="row my-5">
+        <div class="col-12 col-lg-6 ">
+            <h1 class="title" style="color:rgb(252, 60, 13); font-weight: bold;"> </h1>
+          <ul class="list-group" style="font-weight: bold;">
+            <!-- List of Categories -->
+          </ul>
+        </div>
+
+</ul>
+</div>
 {% endblock content %}
 
+
+{% block script %}
+<script> 
+    var URL_EMPTY ="{% url 'empty-cat' %}"
+    var URL_POPULAR = "{% url 'popular_cat' %}"
+    $('#empty').on('click', function() {
+        // send a GET request to build the list of categories
+        $.ajax({
+          url: URL_EMPTY,
+          type: 'GET',
+          dataType: 'json',
+        }).done(function(response) {
+          $('.empty').empty();
+          $('.title').empty()
+          $('.title').append("Empty Categories"); 
+          $('.list-group').empty();
+          for (var i in response.empty_cat) {
+            var todo = `<span>${response.empty_cat[i]} </span>`
+            var item = `
+            <li class="list-group-item d-flex justify-content-between">
+              ${todo}
+            </li>
+            `
+            $('.list-group').append(item) // append the new item to the <ul> tag
+          }
+        })
+      })
+
+
+      $('#popular').on('click', function() {
+        // send a GET request to build the list of categories
+        $.ajax({
+          url: URL_POPULAR,
+          type: 'GET',
+          dataType: 'json',
+        }).done(function(response) {
+          $('.popular').empty();
+          $('.title').empty()
+          $('.title').append("Popular Categories"); 
+          $('.list-group').empty();
+        {% comment %} for (var i in response.empty_cat){ {% endcomment %}
+            var todo = `<span> Hello </span>`
+            var item = `
+            <li class="list-group-item d-flex justify-content-between">
+              ${todo}
+            </li>
+            `
+            $('.list-group').append(item) // append the new item to the <ul> tag
+            
+        })
+      })
+
+
+</script>
+
+
+{% endblock script %}

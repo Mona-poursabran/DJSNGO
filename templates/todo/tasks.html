@@ -7,40 +7,43 @@
 
 
 {% block content %}
+    <div class="container mt-5">    
+        <table class="table table-striped mt-4">
+             <thead>
+                 <tr>
+                     <th scope="col">Title</th>
+                     <th scope="col">Priority</th>
+                     <th scope="col">Date_Added</th>
+                     <th scope="col">Category</th>
+                     <th scope="col">View</th>
 
-<div class="container mt-5">    
-       <table class="table table-striped mt-4">
-            <thead>
-                <tr>
-                    <th scope="col">Num</th>
-                    <th scope="col">Tasks</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Get More Info</th>
-                    <th scope="col">ID</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in object_list %}
-                <tr>
-                    <th scope="row">{{forloop.counter}}</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 {% for task in object_list %}
+                 <tr>
                     <th >{{task.title}}</th>
-                    
+                    <th >{{task.priority}}</th>
                     <th >{{task.date_added}}</th>
-                    <th>
-                        <a href="{% url 'detail' task.pk %}" class="btn btn-warning">Details</a>
+                    <th >
+                        {% for c in task.category.all %}
+                        {{c}}
+                        {% endfor %}
                     </th>
-                    <th >{{task.id}}</th>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
+                    <th>
+                        <a href="{% url 'detail' task.pk %}" class="btn btn-warning" style="color:black">Details</a>
+                    </th>
+                 </tr>
+                 {% endfor %}
+             </tbody>
+         </table>
+     </div>
 
 
 
    {% comment %} <div class="container page-todo bootstrap snippets bootdeys">
-<div class="col-sm-7 tasks">
+
+    <div class="col-sm-7 tasks">
 	<div class="task-list">       
 		<h1>Tasks</h1>
 		<div class="priority high"><span>high priority</span></div>
@@ -86,8 +89,8 @@
             </div>			
 		<div class="clearfix"></div>		
 	</div>		
-</div>
-</div> {% endcomment %}
+ </div>
+ </div> {% endcomment %}
 
 
 {% endblock content %}

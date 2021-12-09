@@ -4,25 +4,19 @@
     {% load static %}
     <link rel="stylesheet" href={% static "todo_s/task_detail.css" %}>
 {% endblock style %}
-{% block content %}
-    
-    {% comment %} <div class="container mt-4">
-        <a class="btn btn-success" href="{% url 'tasks' %}">Back</a>
-        <br>
-        <br>
-        <div><h4>Time: {{task.date_added}}</h4></div>
-        <br>
-        <div><h1 style="color:rgb(199, 10, 126)">Category: {{task.Category.category_name}}</h1></div>
-        <div><h2>Title :{{task.title}}<h2></div>
-        <div><h2>priority: {{task.priority}}</h2></div>
-        <div><h2>Description: {{task.description}}</h2></div>
-    </div> {% endcomment %}
 
+
+{% block content %}
 	<div class="container group">
 		<div class="grid-1-5">
 			<h2>Details</h2>
 			<h3><span class="uppercase">Time: {{task.date_added}}</span></h3>
-			<h1 style="color:rgb(199, 10, 126)">Category: {{task.Category.category_name}}</h1>
+			<h1 style="color:rgb(199, 10, 126)">
+                Category:
+                {% for c in task.category.all %}
+                 {{c}}
+                {% endfor %}
+            </h1>
 			<ul>
 				<li><h1>Title :{{task.title}} </h1></li>
 				<li>priority: {{task.priority}}</li>

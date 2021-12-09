@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %} Category List{% endblock title %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href={% static "todo_s/task.css" %}>
+{% endblock style %}
+
+{% block content %}
+<div class="container">
+    <form id="cat-form">
+        <div class="row">
+            {% csrf_token %}
+        <ul>
+            {% for field in form %}
+            <div class="form-group col-4">       
+                <label class="col-12">{{ field.label }}</label>
+                <ol>{{ field }}</ol>
+            </div>
+            {% endfor %}
+        </ul>
+            <div class="form-group col"> 
+                <input type="submit" class="btn btn-primary" value="Create Task" style="width: auto;"/>
+                <a href="{% url 'index' %}"><button type="submit" class="btn btn-info" >Back Home Page</a></button>
+                <a href="{% url 'cat' %}"><button type="submit" class="btn btn-success" >Back Category Page</a></button>
+            </div>
+        </div>
+    <form>
+    
+</div>
+{% endblock content %}
+
+{% block script %}
+<script >
+    var URL = "{% url 'new_cat1' %}"
+    console.log(URL)
+
+    $("#cat-form").submit(function(e){
+        e.preventDefault();
+
+        var SerializedData = $(this).serialize();
+        $.ajax({
+            type:'POSt',
+            url: URL,
+            data : SerializedData, 
+            success :function(response){
+                console.log(response)
+                alert('New category is saved.')
+            }
+        })
+        $(this).trigger('reset')
+    })
+
+</script>
+
+{% endblock script %}

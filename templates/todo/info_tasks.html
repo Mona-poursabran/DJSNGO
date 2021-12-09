@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% block title %} Info Tasks {% endblock title %}
+
+
+{% block content %}
+<div class="container ">
+    <input type="submit" name="expired" class="btnContact btn-danger btn" id="expired" value="Expired Tasks" />
+<br><br>
+    <input type="submit" name="unexpired" class="btnContact btn-success btn" id="unexpired" value="Unexpired Tasks" />
+<br><br>
+    <input type="submit" name="last" class="btnContact btn-primary btn" id="last_task" value="Last Tasks" />
+</div>
+
+<div class="row my-5">
+  <div class="col-12 col-lg-6 ">
+    <h1 class="title" style="color:rgb(94, 2, 2); font-weight: bold;"> </h1>
+    <ul class="list-group" style="font-weight: bold;">
+      <!-- List of Expired Tasks goes here -->
+    </ul>
+  </div>
+  </div>
+
+<div class="container mt-5">    
+  <table class="table table-striped mt-4">
+       <thead>
+           <tr>
+               <th scope="col">Title</th>
+               <th scope="col">Priority</th>
+               <th scope="col">Date_Added</th>
+               <th scope="col">Description</th>
+           </tr>
+       </thead>
+       <tbody class='task_all'>
+         <tr>
+             <!-- lsit of tasks -->
+         </tr>
+       </tbody>
+  </table>
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+var URL_ALL_TASK = "{% url 'task-all' %}"
+var URL_EXPIRED = "{% url 'expired-list' %}"
+var URL_UNEXPIRED = "{% url 'unexpired-list' %}"
+var URL_LAST = "{% url 'last-list' %}"
+
+  $(document).ready(function(){
+    console.log('hi')
+    $.ajax({
+      type:'GET',
+      dataType:'json',
+      url: URL_ALL_TASK,
+    }).done(function(res){
+      console.log(res)
+      for (var i in res.task_all){
+        var title =`<tr>
+          + <th> ${res.task_all[i].title} </th> +
+          <th>${res.task_all[i].priority}</th> +
+          <th>${res.task_all[i].date_added}</th> +
+          <th>${res.task_all[i].description}</th></tr>`
+        
+        $('.task_all').append(title)
+      }
+      })
+    })
+
+
+
+  $('#expired').on('click', function() {
+    // send a GET request to build the list of expired tasks
+    $.ajax({
+      url: URL_EXPIRED,
+      type: 'GET',
+      dataType: 'json',
+    }).done(function(response) {
+      $('.expired').empty();
+      $('.title').empty()
+     $('.title').append("Expired Tasks"); 
+      $('.list-group').empty();
+      for (var i in response.expired_taks) {
+        var todo = `<span>${response.expired_taks[i]} </span>`
+        var item = `
+        <li class="list-group-item d-flex justify-content-between">
+          ${todo}
+        </li>
+        `
+        $('.list-group').append(item) // append the new item to the <ul> tag
+      }
+    })
+  })
+
+
+  $('#unexpired').on('click', function() {
+    // send a GET request to build the list of unexpired tasks
+    $.ajax({
+      url: URL_UNEXPIRED ,
+      type: 'GET',
+      dataType: 'json',
+    }).done(function(response) {
+      $('.unexpired').empty()
+      $('.title').empty()
+      $('.title').append("Unexpired Tasks")
+      $('.list-group').empty()
+      for (var i in response.unexpired_task) {
+        var todo1 = `<span>${response.unexpired_task[i]} </span>`
+        var item = `
+        <li class="list-group-item d-flex justify-content-between">
+          ${todo1}
+        </li>
+        `
+        $('.list-group').append(item) // append the new item to the <ul> tag
+      }
+    })
+  })
+
+
+  $('#last_task').on('click', function() {
+    // send a GET request to build the list of three last task
+    $.ajax({
+      url: URL_LAST,
+      type: 'GET',
+      dataType: 'json',
+    }).done(function(response) {
+      $('.last').empty()
+      $('.title').empty()
+      $('.title').append("Three Last Tasks")
+      $('.list-group').empty()
+      for (var i in response.last_task) {
+        var todo2 = `<span>${response.last_task[i]} </span>`
+        var item = `
+        <li class="list-group-item d-flex justify-content-between">
+          ${todo2}
+        </li>
+        `
+        $('.list-group').append(item) // append the new item to the <ul> tag
+      }
+    })
+  })
+
+</script>
+
+{% endblock script %}
+

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %} Task View {% endblock title %}
+
+{% block content %}
+
+<a href="{% url 'new_cat1' %}" style="text-decoration:none; color:rgb(131, 1, 124)"><h4> ADD a new category </h4></a> 
+
+<h1> TODO Application</h1>
+<div class="container-fluid">
+
+    <form id="task-form">
+
+        <div class="row">
+
+            {% csrf_token %}
+        <ul>
+            {% for field in form %}
+
+            <div class="form-group col-4">
+                
+                <label class="col-12">{{ field.label }}</label>
+
+                <ol>{{ field }}</ol>
+
+            </div>
+
+            {% endfor %}
+        </ul>
+            <input type="submit" class="btn btn-primary" value="Create Task" style="width: auto;"/>
+
+        </div>
+    <form>
+
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+<script >
+    $("#task-form").submit(function(e){
+        e.preventDefault();
+        var URL= "{% url 'index' %}"
+        var CSRF_TOKEN = '{{csrf_token}}'
+
+        var SerializedData = $(this).serialize();
+        $.ajax({
+            type:'POSt',
+            dataType:'json',
+            url: URL,
+            data : SerializedData,
+            success :function(response){
+                console.log('response', response)
+                alert('New task is saved.')
+            }
+        }).done(function(data){
+            console.log({})
+            console.log('data', data)
+        })
+        $(this).trigger('reset')
+    })
+</script>
+
+{% endblock script %}
