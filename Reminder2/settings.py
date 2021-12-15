@@ -44,6 +44,11 @@ INSTALLED_APPS = [
     'TODO',
     'products',
     'inheritaces',
+
+    ### Just for practicing 
+    'makingform', 
+    ## crispy
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -61,7 +66,7 @@ ROOT_URLCONF = 'Reminder2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,3 +143,5 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
