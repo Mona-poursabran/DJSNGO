@@ -21,9 +21,9 @@
 <br>
 <div class="container ">
 
-    <input type="submit" name="empty" class="btnContact btn-danger btn" id="empty" value="Empty Categories" />
-    <input type="submit" name="popular" class="btnContact btn-success btn" id="popular" value="Popular Categories" />
-    
+    <button name = "submit" class="btnContact btn-danger btn" id="empty"> Empty Categories </button>
+    <button name = "submit" class="btnContact btn-success btn" id="popular"> Popular Categories </button>  
+   
     <div class="row my-5">
         <div class="col-12 col-lg-6 ">
             <h1 class="title" style="color:rgb(252, 60, 13); font-weight: bold;"> </h1>
@@ -76,8 +76,8 @@
           $('.title').empty()
           $('.title').append("Popular Categories"); 
           $('.list-group').empty();
-        {% comment %} for (var i in response.empty_cat){ {% endcomment %}
-            var todo = `<span> Hello </span>`
+          for (var i in response.popular_cat){ 
+            var todo = `<span> ${response.popular_cat[i]} </span>`
             var item = `
             <li class="list-group-item d-flex justify-content-between">
               ${todo}
@@ -85,9 +85,9 @@
             `
             $('.list-group').append(item) // append the new item to the <ul> tag
             
-        })
+        }
       })
-
+ })
 
 </script>
 
