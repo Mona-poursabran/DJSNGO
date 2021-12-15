@@ -20,7 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('product/', include('products.urls')),
     path('inher/', include('inheritaces.urls')),
-    
+    path('form/', include('makingform.urls')),
     path('api_auth/', include('rest_framework.urls')),
     path('todo/', include('TODO.urls')),
 ]
