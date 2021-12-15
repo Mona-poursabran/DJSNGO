@@ -51,6 +51,8 @@ def homepage(req):
 
 
 
+
+
 ### Quesion20 / save info in database as json and get form
 class TasksView(View):
     form_class = TaskForm
@@ -73,14 +75,14 @@ class TasksView(View):
                 return JsonResponse({"error": form.errors}, status = 400)
         return JsonResponse({"error": ""}, status= 400)
 
-
+"""19"""
 class TaskViews(ListView):
     model = Task
     template_name = 'todo/tasks.html'
 
     queryset = Task.objects.order_by('date_added') #todo
 
-
+"""19"""
 class TaskDetail(DetailView):
     model = Task
     template_name = 'todo/task_detail.html'
@@ -117,7 +119,7 @@ class CategoryView(ListView):
     model = Category
     template_name = 'todo/category.html'
 
-    
+"""19"""   
 class CategoryDetail(DetailView):
     model = Category
     template_name = 'todo/catdetail.html'
@@ -165,7 +167,7 @@ class NewCategory(View):
         return JsonResponse({"error": ""}, status= 400)
     
 
-
+"""19"""
 def new_category(req):
     if req.method != 'POST':
         form = CategoryForm()
@@ -182,12 +184,10 @@ def new_category(req):
 
 ### Question20 Two buttons to show some categories
 def empty_category(req):
-    empty_cat = Category.objects.filter(cat_tasks__title__isnull= True)
+    empty_cat = Category.objects.filter(cat_tasks__isnull= True)
     return JsonResponse({'empty_cat':list(empty_cat.values_list('category_name', flat=True))})
 
-def popular_category(req): # :(
-    total_num = Category.objects.annotate(count =Count('cat_tasks__title'))
-    for i in range(len(total_num)):
-        print(total_num[i], total_num[i].count)
-    return JsonResponse({'empty_cat':''})
+def popular_category(req): 
+    total_num = Category.objects.annotate(count =Count('cat_tasks__title')).order_by('-count')[:3]
+    return JsonResponse({'popular_cat':list(total_num.values_list('category_name', flat=True))})
  
